@@ -5,6 +5,7 @@ google-genai
 groq
 python-dotenv
 passlib[bcrypt]
+bcrypt==3.2.2
 python-jose[cryptography]
 motor
 redis
