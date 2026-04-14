@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+python-multipart
+google-genai
+groq
+python-dotenv
+passlib[bcrypt]
+python-jose[cryptography]
+motor
+redis
+PyYAML
