@@ -6,29 +6,39 @@ export default {
   ],
   theme: {
     extend: {
-      // Custom "Cyber-Agent" Color Palette
+      // 🎨 Dynamic Theme Palette (Pointed to CSS Variables)
       colors: {
-        'ui-black': '#050505',      // Deepest Black for background
-        'ui-card': '#0f0f0f',       // Slightly lighter for cards
-        'ui-accent': '#00ff88',     // Cyber Green (The YOLO theme)
-        'ui-purple': '#8b5cf6',     // Soft AI Purple
-        'ui-border': 'rgba(255, 255, 255, 0.08)', // Subtle borders
-        'ui-text': '#f3f4f6',       // Off-white for readability
+        'ui-black': 'var(--ui-bg)',
+        'ui-surface': 'var(--ui-surface)',
+        'ui-card': 'var(--ui-card)',
+        'ui-card-hover': 'var(--ui-card-hover)',
+        'ui-accent': 'var(--ui-accent)',
+        'ui-purple': 'var(--ui-purple)',
+        'ui-border': 'var(--ui-border)',
+        'ui-text': 'var(--ui-text)',
+        'ui-muted': 'var(--ui-text-muted)',
       },
-      // Responsive Breakpoints (Mobile First)
+
+      // 📱 Responsive Breakpoints
       screens: {
-        'xs': '475px',    // Extra small phones
-        'sm': '640px',    // Standard phones
-        'md': '768px',    // Tablets
-        'lg': '1024px',   // Laptops
-        'xl': '1280px',   // Desktops
-        '2xl': '1536px',  // Ultra-wide
+        'xs': '475px',
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
       },
-      // Animation Keyframes for a "Living" UI
+
+      // ⚡ Animations
       animation: {
         'slow-drift': 'drift 20s infinite linear',
         'subtle-glow': 'glow 4s infinite ease-in-out',
+        'scan': 'scan 6s linear infinite',
+        'grid-pulse': 'gridPulse 8s ease-in-out infinite',
+        'blob': 'blob 12s infinite ease-in-out',
       },
+
+      // 🧠 Keyframes
       keyframes: {
         drift: {
           '0%': { transform: 'translate(0, 0)' },
@@ -38,7 +48,21 @@ export default {
         glow: {
           '0%, 100%': { opacity: 0.4 },
           '50%': { opacity: 0.8 },
-        }
+        },
+        scan: {
+          '0%': { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(100%)' },
+        },
+        gridPulse: {
+          '0%, 100%': { opacity: 0.15 },
+          '50%': { opacity: 0.3 },
+        },
+        blob: {
+          '0%': { transform: 'translate(0px, 0px) scale(1)' },
+          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+          '100%': { transform: 'translate(0px, 0px) scale(1)' },
+        },
       }
     },
   },

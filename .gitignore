@@ -1,0 +1,24 @@
+node_modules/
+dist/
+.DS_Store
+.env
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+env/
+.venv/
+server/venv/
+server/temp_uploads/
+
+# Vite / React
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+*.log
+
+# Windows
+Thumbs.db

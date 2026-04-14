@@ -1,67 +1,135 @@
-import React, { useState, useCallback, useMemo } from 'react';
-import { Link } from 'react-router-dom'; // Using Link for SPA navigation
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Cpu, Github, ChevronRight } from 'lucide-react';
+import { Shield, BrainCircuit, Activity, Layers, User, LogOut, Sun, Moon } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { toast } from 'sonner';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  // Performance Optimization: Memoize the nav links so they don't re-calculate on every render
-  const navLinks = useMemo(() => [
-    { name: 'Analyzer', path: '/analyzer' },
-    { name: 'Optimizer', path: '/optimizer' },
-    { name: 'Docs', path: '/docs' },
-    { name: 'Fixer', path: '/fixer' },
-  ], []);
+  // ✅ THEME TOGGLE LOGIC
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
 
-  // Performance Optimization: Use Callback for toggles to prevent function recreation
-  const toggleMenu = useCallback(() => setIsOpen(prev => !prev), []);
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
+
+  const navItems = [
+    { name: 'DOCS', icon: <Layers size={14} />, path: '/docs' },
+    { name: 'ANALYZER', icon: <Activity size={14} />, path: '/agent' },
+  ];
+
+  const handleLogout = () => {
+    logout();
+    
+    // Explicitly wipe Agent context keys to prevent cross-user leakage
+    const agentKeys = ['sessionId', 'currentStep', 'datasetStats', 'strategy', 'includeTestSplit'];
+    agentKeys.forEach(k => localStorage.removeItem(k));
+    
+    toast.success("Identity disconnected. Neural session terminated.", { duration: 3000 });
+    navigate('/login'); // ✅ Replaced hard redirect to preserve toast
+  };
 
   return (
-    <nav className="fixed top-0 w-full z-[100] px-4 py-4 sm:px-6 lg:px-12">
+    <nav className="fixed top-8 left-1/2 -translate-x-1/2 w-[90%] max-w-7xl z-[100]">
       <motion.div 
-        initial={{ y: -50, opacity: 0 }}
+        initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="max-w-7xl mx-auto glass rounded-2xl px-5 py-3 flex justify-between items-center"
+        className="glass rounded-[2rem] px-8 py-4 flex items-center justify-between shadow-2xl overflow-hidden"
       >
-        {/* LOGO - Wrapped in Link */}
-        <Link to="/" className="flex items-center gap-2 group cursor-pointer">
-          <div className="bg-ui-accent/20 p-2 rounded-xl group-hover:rotate-12 transition-all">
-            <Cpu className="text-ui-accent w-6 h-6" />
-          </div>
-          <span className="text-xl font-bold tracking-tighter text-white">
-            YOLO<span className="text-ui-accent">INTEL</span>
+        {/* LOGO */}
+        <div 
+          onClick={() => navigate('/')}
+          className="flex items-center gap-3 cursor-pointer group"
+        >
+          <img 
+            src="/logo.gif" 
+            alt="AutoYOLO" 
+            className="w-10 h-10 object-contain rounded-xl dark-blend-white group-hover:scale-110 transition-transform" 
+          />
+          <span className="text-ui-text font-black text-xl italic tracking-tighter group-hover:text-ui-accent transition-colors">
+            AUTOYOLO
           </span>
-        </Link>
+        </div>
 
-        {/* DESKTOP NAV - Using Link */}
-        <div className="hidden md:flex gap-8 items-center text-sm font-medium text-gray-400">
-          {navLinks.map((link) => (
-            <Link 
-              key={link.name} 
-              to={link.path} 
-              className="hover:text-ui-accent transition-all duration-300"
+        {/* LINKS */}
+        <div className="hidden md:flex items-center gap-8">
+          {navItems.map((item) => (
+            <button
+              key={item.name}
+              onClick={() => navigate(item.path)}
+              className={`flex items-center gap-2 text-[10px] font-black tracking-[0.2em] transition-all hover:text-ui-accent ${
+                location.pathname === item.path ? 'text-ui-accent' : 'text-ui-muted'
+              }`}
             >
-              {link.name}
-            </Link>
+              {item.icon} {item.name}
+            </button>
           ))}
         </div>
 
-        <div className="hidden md:flex items-center gap-4">
-          <Github className="w-5 h-5 text-gray-500 hover:text-white cursor-pointer transition-colors" />
-          <button className="bg-ui-accent text-black font-bold text-xs px-6 py-2.5 rounded-xl">
-            GET STARTED
-          </button>
+        {/* ACTIONS & PROFILE */}
+        <div className="flex items-center gap-6">
+          
+          {/* ✅ THEME SWITCHER */}
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={toggleTheme}
+            className="w-14 h-14 p-1.5 rounded-2xl aperture-toggle flex items-center justify-center group/theme shadow-[0_0_30px_rgba(0,255,136,0.1)]"
+            title="Toggle Neural Theme"
+          >
+            <img 
+              src="/brightness.gif" 
+              alt="Toggle Theme" 
+              className="w-full h-full object-cover rounded-xl dark-blend-white group-hover:brightness-125 transition-all" 
+            />
+          </motion.button>
+
+          <AnimatePresence>
+            {user ? (
+              <motion.div 
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="flex items-center gap-4"
+              >
+                <div className="flex items-center gap-3 bg-ui-accent/10 border border-ui-accent/20 px-4 py-2 rounded-xl">
+                  <User size={14} className="text-ui-accent" />
+                  <span className="text-[10px] font-black tracking-widest text-ui-text uppercase">
+                    {user.username}
+                  </span>
+                </div>
+                <button 
+                  onClick={handleLogout}
+                  className="p-2 text-ui-muted hover:text-red-500 transition-colors"
+                  title="Logout"
+                >
+                  <LogOut size={18} />
+                </button>
+              </motion.div>
+            ) : (
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => navigate('/login')}
+                className="bg-ui-accent text-black px-6 py-2.5 rounded-xl text-[10px] font-black tracking-widest uppercase shadow-xl"
+              >
+                Enter Platform
+              </motion.button>
+            )}
+          </AnimatePresence>
         </div>
 
-        <div className="md:hidden">
-          <button onClick={toggleMenu} className="p-2 text-gray-400">
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+        {/* GLOW DECORATION */}
+        <div className="absolute -bottom-px left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-ui-accent/30 to-transparent" />
       </motion.div>
-      
-      {/* Mobile Menu Logic remains similar but replaces <a> with <Link> */}
     </nav>
   );
 };

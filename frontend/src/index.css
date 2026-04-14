@@ -7,22 +7,51 @@
 
 :root {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: #050505;
-  color: #f3f4f6;
+  
+  /* 🌑 DARK THEME (Default) */
+  --ui-bg: #030303;
+  --ui-surface: #070707;
+  --ui-card: #0a0a0a;
+  --ui-card-hover: #101010;
+  --ui-text: #f3f4f6;
+  --ui-text-muted: #9ca3af;
+  --ui-border: rgba(255, 255, 255, 0.04);
+  --ui-glass: rgba(10, 10, 10, 0.7);
+  --ui-accent: #00ff88;
+  --ui-purple: #8b5cf6;
+  
+  background-color: var(--ui-bg);
+  color: var(--ui-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ☀️ LIGHT THEME (Scientific Clean) */
+[data-theme='light'] {
+  --ui-bg: #f8fafc;
+  --ui-surface: #ffffff;
+  --ui-card: #f1f5f9;
+  --ui-card-hover: #e2e8f0;
+  --ui-text: #0f172a;
+  --ui-text-muted: #64748b;
+  --ui-border: rgba(0, 0, 0, 0.08);
+  --ui-glass: rgba(255, 255, 255, 0.8);
+  --ui-accent: #00ff88; 
+  --ui-purple: #7c3aed;
 }
 
 body {
   margin: 0;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  background-color: var(--ui-bg);
 }
 
-/* Glassmorphism Utility - Use this for a blurred background look */
+/* Glassmorphism Utility */
 .glass {
-  background: rgba(15, 15, 15, 0.7);
+  background: var(--ui-glass);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--ui-border);
 }
 
 /* Custom Minimalist Scrollbar */
@@ -30,17 +59,17 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: var(--ui-bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: #1f1f1f;
+  background: var(--ui-border);
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00ff88;
+  background: var(--ui-accent);
 }
 
-/* Background mesh to prevent "flat" black look */
+/* Background mesh to prevent "flat" look */
 .mesh-gradient {
   position: fixed;
   top: 0;
@@ -49,6 +78,39 @@ body {
   height: 100%;
   z-index: -1;
   background-image: 
-    radial-gradient(at 0% 0%, rgba(0, 255, 136, 0.03) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.03) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(0, 255, 136, 0.02) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.02) 0px, transparent 50%);
+}
+
+[data-theme='light'] .mesh-gradient {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(0, 255, 136, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
+}
+
+/* 🧬 NEURAL ASSET BLENDING */
+.neural-gif {
+  mix-blend-mode: plus-lighter;
+  filter: contrast(1.1) brightness(1.1);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* For assets with white backgrounds on dark theme (like logo.gif) */
+.dark-blend-white {
+  filter: invert(1) hue-rotate(180deg) brightness(1.2);
+  mix-blend-mode: screen;
+}
+
+[data-theme='light'] .dark-blend-white {
+  filter: none;
+  mix-blend-mode: multiply;
+}
+
+/* Aperture container for theme-toggle */
+.aperture-toggle {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-card);
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
 }
