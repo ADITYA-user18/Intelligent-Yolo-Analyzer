@@ -101,7 +101,7 @@ const DatasetUpload = () => {
             <motion.div 
               key="idle"
               exit={{ opacity: 0, scale: 0.9 }}
-              className="p-16 flex flex-col items-center text-center cursor-pointer"
+              className="p-8 md:p-16 flex flex-col items-center text-center cursor-pointer"
             >
               <div className="w-20 h-20 bg-ui-accent/10 rounded-3xl flex items-center justify-center text-ui-accent mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg">
                 <Upload size={32} />
@@ -131,7 +131,7 @@ const DatasetUpload = () => {
               key="processing"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="p-16 flex flex-col items-center"
+              className="p-8 md:p-16 flex flex-col items-center"
             >
               <div className="relative mb-8">
                 <Loader2 className="w-16 h-16 text-ui-accent animate-spin" />
@@ -163,7 +163,7 @@ const DatasetUpload = () => {
               key="success"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="p-16 flex flex-col items-center text-center"
+              className="p-8 md:p-16 flex flex-col items-center text-center"
             >
               <div className="w-20 h-20 bg-ui-accent rounded-full flex items-center justify-center text-black mb-6 shadow-[0_0_40px_rgba(0,255,136,0.4)]">
                 <CheckCircle2 size={40} />

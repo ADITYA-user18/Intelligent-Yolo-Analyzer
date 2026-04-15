@@ -15,7 +15,7 @@ const DatasetSidebar = () => {
 
   return (
     <>
-      <div className="w-80 h-[calc(100vh-120px)] bg-ui-surface backdrop-blur-xl border border-ui-border rounded-[2rem] flex flex-col p-6 overflow-hidden">
+      <div className="w-full xl:w-80 flex-none h-[40vh] min-h-[300px] xl:h-[calc(100vh-120px)] bg-ui-surface backdrop-blur-xl border border-ui-border rounded-[2rem] flex flex-col p-6 overflow-hidden">
         
         {/* HEADER */}
         <div className="flex items-center justify-between mb-8 px-2">

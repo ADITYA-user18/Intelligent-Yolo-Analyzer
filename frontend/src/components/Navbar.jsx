@@ -43,7 +43,7 @@ const Navbar = () => {
       <motion.div 
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="glass rounded-[2rem] px-8 py-4 flex items-center justify-between shadow-2xl overflow-hidden"
+        className="glass rounded-[2rem] px-4 md:px-8 py-3 md:py-4 flex items-center justify-between shadow-2xl overflow-hidden"
       >
         {/* LOGO */}
         <div 
@@ -61,7 +61,7 @@ const Navbar = () => {
         </div>
 
         {/* LINKS */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="flex items-center gap-4 md:gap-8 overflow-hidden">
           {navItems.map((item) => (
             <button
               key={item.name}
@@ -119,7 +119,7 @@ const Navbar = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => navigate('/login')}
-                className="bg-ui-accent text-black px-6 py-2.5 rounded-xl text-[10px] font-black tracking-widest uppercase shadow-xl"
+                className="bg-ui-accent text-black px-4 md:px-6 py-2 md:py-2.5 rounded-xl text-[10px] font-black tracking-widest uppercase shadow-xl"
               >
                 Enter Platform
               </motion.button>

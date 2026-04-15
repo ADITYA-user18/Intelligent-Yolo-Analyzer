@@ -254,7 +254,7 @@ const Home = ({ isAgentMode = false }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex gap-8 max-w-[1600px] mx-auto w-full"
+              className="flex flex-col xl:flex-row gap-6 xl:gap-8 max-w-[1600px] mx-auto w-full"
             >
               {/* SIDEBAR: History & Switching */}
               <DatasetSidebar />

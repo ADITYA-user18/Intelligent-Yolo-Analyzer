@@ -215,11 +215,11 @@ if __name__ == "__main__":
         {/* CODE PANEL */}
         <div className="lg:col-span-2 space-y-4">
           <div className="bg-ui-card border border-ui-border rounded-[2.5rem] overflow-hidden shadow-2xl">
-            <div className="bg-ui-surface px-8 py-4 flex justify-between items-center border-b border-ui-border">
+            <div className="bg-ui-surface px-4 md:px-8 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 border-b border-ui-border">
               <span className="text-[10px] font-mono text-ui-muted uppercase tracking-widest flex items-center gap-2">
                 <FileCode size={14} className="text-ui-accent" /> production_train.py
               </span>
-              <div className="flex gap-4">
+              <div className="flex gap-2 sm:gap-4 w-full sm:w-auto justify-end">
                 <motion.button 
                   whileHover={{ scale: 1.05, color: "var(--ui-accent)" }}
                   whileTap={{ scale: 0.95 }}

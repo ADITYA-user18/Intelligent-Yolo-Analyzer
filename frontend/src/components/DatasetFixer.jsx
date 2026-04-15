@@ -76,7 +76,7 @@ const DatasetFixer = () => {
         className="bg-ui-card border border-ui-border rounded-[2.5rem] overflow-hidden shadow-2xl"
       >
         {/* HEADER */}
-        <div className="p-10 border-b border-ui-border bg-gradient-to-r from-ui-accent/5 to-transparent">
+        <div className="p-6 lg:p-10 border-b border-ui-border bg-gradient-to-r from-ui-accent/5 to-transparent">
           <div className="flex items-center gap-4 mb-4">
             <div className="p-3 bg-ui-accent/10 rounded-2xl text-ui-accent">
               <Wrench size={28} />
@@ -88,7 +88,7 @@ const DatasetFixer = () => {
           </div>
         </div>
 
-        <div className="p-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="p-6 lg:p-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           
           {/* LEFT */}
           <div className="space-y-8">

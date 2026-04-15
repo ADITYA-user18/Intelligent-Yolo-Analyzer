@@ -58,14 +58,14 @@ const HyperparameterEngine = () => {
         </div>
 
         {/* Tab Switching */}
-        <div className="flex gap-3 mb-8 bg-ui-card border border-ui-border w-fit p-1.5 rounded-2xl shadow-xl">
+        <div className="flex overflow-x-auto custom-scrollbar gap-3 mb-8 bg-ui-card border border-ui-border w-full md:w-fit p-1.5 rounded-2xl shadow-xl">
           {['train', 'aug', 'val'].map(tab => (
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-8 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-all ${
+              className={`flex-none px-6 md:px-8 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-all ${
                 activeTab === tab 
                   ? 'bg-ui-accent text-black shadow-[0_0_20px_rgba(0,255,136,0.2)]' 
                   : 'text-ui-muted hover:text-ui-text'

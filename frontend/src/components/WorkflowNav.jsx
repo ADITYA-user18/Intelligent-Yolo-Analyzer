@@ -25,7 +25,7 @@ const WorkflowNav = () => {
   };
 
   return (
-    <div className="w-full flex items-center justify-between px-10 mb-12 relative">
+    <div className="w-full flex items-center justify-between px-2 sm:px-10 mb-12 relative overflow-x-auto lg:overflow-visible py-2 custom-scrollbar">
       {/* Progress Track Container */}
       <div className="absolute top-[22px] left-10 right-10 h-[2px] z-0">
         {/* Background Line */}
@@ -50,13 +50,13 @@ const WorkflowNav = () => {
               whileTap={isReachable ? { scale: 0.9 } : {}}
               onClick={() => handleStepClick(step.id)}
               disabled={!isReachable}
-              className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all border-2 ${
-                isActive 
-                  ? 'bg-ui-accent border-ui-accent text-black shadow-[0_0_20px_rgba(0,255,136,0.3)]' 
-                  : isCompleted 
-                  ? 'bg-ui-accent/20 border-ui-accent text-ui-accent' 
-                  : 'bg-ui-surface border-ui-border text-ui-muted'
-              } ${!isReachable && 'opacity-30 cursor-not-allowed'}`}
+              className={`flex-none w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all border-2 ${
+                  isActive 
+                    ? 'bg-ui-accent border-ui-accent text-black shadow-[0_0_20px_rgba(0,255,136,0.3)]' 
+                    : isCompleted 
+                    ? 'bg-ui-accent/20 border-ui-accent text-ui-accent' 
+                    : 'bg-ui-surface border-ui-border text-ui-muted'
+                } ${!isReachable && 'opacity-30 cursor-not-allowed'}`}
             >
               {isCompleted ? <Check size={20} strokeWidth={3} /> : <span className="text-xs font-black">{step.id + 1}</span>}
             </motion.button>
